@@ -17,7 +17,7 @@
             margin: 0;
         }
 
-        .kotak-login {
+        .kotak-register {
             background: white;
             padding: 30px;
             border-radius: 8px;
@@ -68,25 +68,16 @@
     <div class="kotak-register">
         <h1>Register Jadi Warga RT002/008 </h1>
         <h2>Selamat Bergabung Warga</h2>
-        <div class="kotak-register">
-            <h1>Register Warga RT002/008</h1>
-            <h2>Selamat Bergabung Warga</h2>
 
-            <form action="/register" method="POST">
-                @csrf
-                <input type="text" name="name" placeholder="Name Warga" required><br>
-                <input type="email" name="email" placeholder="Email " required><br>
-                <input type="text" name="phone" placeholder="No Phone " required><br>
-                <input type="password" name="password" placeholder="Password" required><br>
-                <input type="password" name="re_password" placeholder="Re-Password" required><br>
-                <<<<<<< HEAD <button type="submit">Register Warga</button>
-            </form><br>
-            <a href="/login">Sudah Punya Akun Warga ?</a>
-
-        </div>
-        <button type="submit">Register Warga </button>
-        </form>
-        <br>
+        <form action="/register" method="POST">
+            @csrf
+            <input type="text" name="name" placeholder="Name Warga" required><br>
+            <input type="email" name="email" placeholder="Email " required><br>
+            <input type="text" name="phone" placeholder="No Phone " required><br>
+            <input type="password" name="password" placeholder="Password" required><br>
+            <input type="password" name="re_password" placeholder="Re-Password" required><br>
+            <button type="submit">Register Warga</button>
+        </form><br>
         <a href="/login">Sudah Punya Akun Warga ?</a>
 
     </div>
