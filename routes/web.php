@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Runner\HookMethod;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('home.welcome_warga');
@@ -22,5 +24,8 @@ Route::get('/home', function () {
 })->middleware('auth');
 
 Route::get('/admin', function () {
+    if (Auth::user()->usertype !== 'admin') {
+        return redirect('/home');
+    }
     return view('admin.admin_rt');
-})->middleware('auth');
+})->middleware(('auth'));
