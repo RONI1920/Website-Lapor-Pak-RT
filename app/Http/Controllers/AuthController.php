@@ -22,6 +22,7 @@ class AuthController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'phone' => 'required | min:12',
             'password' => 'required | min:5',
             're_password' => 'required |same:password'
         ]);
@@ -49,32 +50,25 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        $kredensial = $request->only('email', 'password');
 
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->with('error', 'Email dan Password tidak di temukan');
+        if (Auth::attempt($kredensial)) {
+            $request->session()->regenerate();
+
+            if (Auth::user()->usertype == 'admin') {
+                return Redirect('/admin');
+            }
+            return Redirect('/home');
         }
-
-        Auth::login($user);
-
-        session([
-            'user_id' => $user->id,
-            'role' => $user->usertype,
-            'name' => $user->name,
-            'phone' => $user->phone,
-            'is_logged_in' => true,
-        ]);
-
-        if ($user->usertype == 'admin') {
-            return Redirect('/admin');
-        }
-        return Redirect('/home');
+        return back()->with('error', 'Email dan Password');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        session()->flush();
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return view('/home.welcome_warga');
+        return redirect('/');
     }
 }
