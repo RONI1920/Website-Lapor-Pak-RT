@@ -18,7 +18,7 @@
             margin: 0;
         }
 
-        .kotak-login {
+        .kotak-register {
             background: white;
             padding: 30px;
             border-radius: 8px;
@@ -67,8 +67,8 @@
 
 <body>
     <div class="kotak-register">
-        <h1>Register Jadi Warga </h1>
-        <p>Selamat Bergabung Warga RT 002 </p>
+        <h1>Register Jadi Warga RT002/008 </h1>
+        <h2>Selamat Bergabung Warga</h2>
 
         <form action="/register" method="POST">
             @csrf
