@@ -1,22 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout.layout_base')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('content')
+    <h2>Dashboard Admin</h2>
+    <p>Selamat datang, Pak RT!</p>
 
-<body>
-    <h1>Selamat datang Pak RT</h1>
-    <h2>INI Dashboard RT 002 </h2>
-
-    <form action="/logout" method="POST">
-        @csrf
-        <button type="submit">Logout</button>
-    </form>
-
-</body>
-
-</html>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card text-bg-primary mb-3">
+                <div class="card-header">Laporan Masuk</div>
+                <div class="card-body">
+                    <h1 class="card-title">0</h1>
+                    <p class="card-text">Belum diproses</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-bg-success mb-3">
+                <div class="card-header">Laporan Selesai</div>
+                <div class="card-body">
+                    <h1 class="card-title">0</h1>
+                    <p class="card-text">Sudah ditangani</p>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
