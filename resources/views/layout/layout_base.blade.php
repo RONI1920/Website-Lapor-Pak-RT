@@ -45,6 +45,11 @@
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
                 @yield('content')
             </main>
+
+            <footer class="mt-5 pt-3 border-top text-center text-muted small">
+                <p>&copy; 2025 Rukun Tetangga 002. All Rights Reserved.</p>
+            </footer>
+
         </div>
     </div>
 

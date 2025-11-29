@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="kotak-form">
+    <div class="kotak-registrasi">
         <h1>Register Jadi Warga RT002/008 </h1>
         <h2>Selamat Bergabung Warga</h2>
 
@@ -35,6 +35,10 @@
             <button type="submit">Register Warga</button>
         </form><br>
         <a href="/login">Sudah Punya Akun Warga ?</a>
+
+        <p class="mt-4 text-muted small">
+            &copy; 2025 Rukun Tetangga 002. All Rights Reserved.
+        </p>
 
     </div>
 </body>
