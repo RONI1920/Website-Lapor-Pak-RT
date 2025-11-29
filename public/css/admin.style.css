@@ -1,0 +1,17 @@
+.sidebar {
+    height: 100vh;
+    /* Full tinggi layar */
+    background-color: #343a40;
+    /* Abu gelap */
+}
+
+/* Saya update sedikit biar hovernya lebih mulus */
+.sidebar .nav-link {
+    color: white;
+    margin-bottom: 5px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #495057;
+    border-radius: 5px;
+}

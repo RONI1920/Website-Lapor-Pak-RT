@@ -8,26 +8,8 @@
     <title>Home Admin Lapor Pak RT 002 RW 008</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/admin.style.css') }}">
 
-    <style>
-        .sidebar {
-            height: 100vh;
-            /* Full tinggi layar */
-            background-color: #343a40;
-            /* Abu gelap */
-        }
-
-        /* Saya update sedikit biar hovernya lebih mulus */
-        .sidebar .nav-link {
-            color: white;
-            margin-bottom: 5px;
-        }
-
-        .sidebar .nav-link:hover {
-            background-color: #495057;
-            border-radius: 5px;
-        }
-    </style>
 </head>
 
 <body>
