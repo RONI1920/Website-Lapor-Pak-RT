@@ -15,6 +15,16 @@
         <h1>Register Jadi Warga RT002/008 </h1>
         <h2>Selamat Bergabung Warga</h2>
 
+        @if ($errors->any())
+            <div style="color: red; margin-bottom: 10px;">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form action="/register" method="POST">
             @csrf
             <input type="text" name="name" placeholder="Name Warga" required><br>
