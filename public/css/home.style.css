@@ -1,0 +1,75 @@
+/* Reset dasar */
+body,
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Background satu layar penuh dengan gradasi biru */
+.hero-section {
+    background: linear-gradient(135deg, #0d6efd 0%, #00d2ff 100%);
+    height: 100vh; /* 100% tinggi layar */
+    display: flex;
+    justify-content: center; /* Tengah horizontal */
+    align-items: center; /* Tengah vertikal */
+    padding: 20px;
+}
+
+/* Kotak Putih di Tengah (Kartu) */
+.welcome-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 500px; /* Maksimal lebar kartu */
+    text-align: center;
+}
+
+/* Judul */
+.welcome-card h1 {
+    color: #333;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.welcome-card h2 {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-weight: normal;
+}
+
+/* Tombol Custom (agar lebih besar dan cantik) */
+.btn-custom {
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+.btn-register {
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+}
+
+.btn-register:hover {
+    background-color: #0b5ed7;
+    transform: translateY(-2px); /* Efek naik sedikit saat hover */
+}
+
+.btn-login {
+    background-color: transparent;
+    color: #0d6efd;
+    border: 2px solid #0d6efd;
+}
+
+.btn-login:hover {
+    background-color: #0d6efd;
+    color: white;
+}
