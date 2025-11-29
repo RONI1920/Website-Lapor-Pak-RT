@@ -12,8 +12,8 @@
 </head>
 
 <body>
-    <div class="kotak-form">
-        <h1>Halaman Login</h1>
+    <div class="kotak-login">
+        <h1>Halaman Login Warga </h1>
         @if (@session('error'))
             <p style="color-red;">{{ session('error') }}</p>
         @endif
@@ -28,6 +28,10 @@
             <button type="submit">Login Warga</button>
         </form><br>
         <a href="/register">Daftar Akun Warga ?</a>
+
+        <p class="mt-4 text-muted small">
+            &copy; 2025 Rukun Tetangga 002. All Rights Reserved.
+        </p>
     </div>
 </body>
 
