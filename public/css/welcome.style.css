@@ -9,7 +9,11 @@ html {
 
 /* Background satu layar penuh dengan gradasi biru */
 .hero-section {
-    background: linear-gradient(135deg, #0d6efd 0%, #00d2ff 100%);
+    background-image: url("../image/undraw_key-insights_ex8y.png");
+    background-size: 35% auto;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: #ffffff;
     height: 100vh; /* 100% tinggi layar */
     display: flex;
     justify-content: center; /* Tengah horizontal */
