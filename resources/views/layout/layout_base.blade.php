@@ -33,6 +33,21 @@
                         <a class="nav-link" href="#">Data Warga</a>
                     </li>
 
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between align-items-center"
+                            href="{{ route('inbox') }}">
+                            <span>
+                                Kotak Masuk
+                            </span>
+
+                            @if (Auth::user()->unreadNotifications->count() > 0)
+                                <span class="badge bg-danger rounded-pill">
+                                    {{ Auth::user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </a>
+                    </li>
+
                     <li class="nav-item mt-5">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

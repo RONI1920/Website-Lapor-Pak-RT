@@ -6,30 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard Warga - Lapor Pak RT</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .sidebar {
-            height: 100vh;
-            background-color: #f8f9fa;
-            border-right: 1px solid #dee2e6;
-        }
+    <link rel="stylesheet" href="{{ asset('css/home.style.css') }}">
 
-        .sidebar .nav-link {
-            color: #333;
-            padding: 10px 15px;
-        }
-
-        .sidebar .nav-link:hover,
-        .sidebar .nav-link.active {
-            background-color: #0d6efd;
-            color: white;
-            border-radius: 5px;
-        }
-
-        .card-icon {
-            font-size: 2.5rem;
-            opacity: 0.8;
-        }
-    </style>
 </head>
 
 <body>
@@ -53,6 +31,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Profil Saya</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link d-flex justify-content-between align-items-center"
+                            href="{{ route('inbox') }}">
+                            <span>
+                                Kotak Masuk
+                            </span>
+
+                            @if (Auth::user()->unreadNotifications->count() > 0)
+                                <span class="badge bg-danger rounded-pill">
+                                    {{ Auth::user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </a>
+                    </li>
                     <li class="nav-item mt-5">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -69,6 +61,37 @@
                     <h1 class="h2">Selamat Datang, {{ Auth::user()->name }}!</h1>
                 </div>
 
+                <div class="mb-4">
+                    @if (Auth::user()->unreadNotifications->count() > 0)
+
+                        <div class="alert alert-info shadow-sm">
+                            <h5 class="alert-heading">🔔 Notifikasi Baru</h5>
+                            <ul class="list-group list-group-flush bg-transparent">
+
+                                @foreach (Auth::user()->unreadNotifications as $notification)
+                                    <li
+                                        class="list-group-item bg-transparent d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <strong>{{ $notification->data['pesan'] }}</strong><br>
+                                            <small class="text-muted">Judul Laporan:
+                                                {{ $notification->data['judul'] }}</small>
+                                        </div>
+                                        <a href="{{ route('notifikasi.baca', $notification->id) }}"
+                                            class="btn btn-sm btn-primary">Lihat</a>
+                                    </li>
+                                @endforeach
+
+                            </ul>
+
+                            <div class="mt-2 text-end">
+                                <a href="{{ route('notifikasi.read') }}"
+                                    class="text-decoration-none small fw-bold">Tandai Semua Sudah Dibaca</a>
+                            </div>
+                        </div>
+
+                    @endif
+                </div>
+
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <strong>Berhasil!</strong> {{ session('success') }}
@@ -77,47 +100,57 @@
                 @endif
 
                 <div class="row mb-4">
-                    <div class="col-md-4">
-                        <div class="card text-white bg-primary mb-3 shadow-sm">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-primary mb-3 shadow-sm h-100">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h5 class="card-title">Total Laporan</h5>
+                                    <h6 class="card-title">Total Laporan</h6>
                                     <p class="card-text fs-4 fw-bold">{{ $laporans->count() }}</p>
                                 </div>
-                                <div class="card-icon">📝</div>
+                                <div class="card-icon opacity-50">📝</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="card text-white bg-warning mb-3 shadow-sm">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-info mb-3 shadow-sm h-100">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h5 class="card-title">Sedang Diproses</h5>
+                                    <h6 class="card-title">Ditanggapi</h6>
                                     <p class="card-text fs-4 fw-bold">
-                                        {{ $laporans->where('status', 'proses')->count() }}
-                                    </p>
+                                        {{ $laporans->where('status', 'respon')->count() }}</p>
                                 </div>
-                                <div class="card-icon">⏳</div>
+                                <div class="card-icon opacity-50">💬</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="card text-white bg-success mb-3 shadow-sm">
+                    <div class="col-md-3">
+                        <div class="card text-white bg-warning mb-3 shadow-sm h-100">
                             <div class="card-body d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h5 class="card-title">Selesai</h5>
+                                    <h6 class="card-title">Sedang Diproses</h6>
                                     <p class="card-text fs-4 fw-bold">
-                                        {{ $laporans->where('status', 'selesai')->count() }}
-                                    </p>
+                                        {{ $laporans->where('status', 'proses')->count() }}</p>
                                 </div>
-                                <div class="card-icon">✅</div>
+                                <div class="card-icon opacity-50">⏳</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="card text-white bg-success mb-3 shadow-sm h-100">
+                            <div class="card-body d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="card-title">Selesai</h6>
+                                    <p class="card-text fs-4 fw-bold">
+                                        {{ $laporans->where('status', 'selesai')->count() }}</p>
+                                </div>
+                                <div class="card-icon opacity-50">✅</div>
                             </div>
                         </div>
                     </div>
                 </div>
-
                 <h4>Riwayat Laporan Terakhir</h4>
                 <div class="table-responsive mt-3">
                     <table class="table table-hover table-bordered shadow-sm align-middle">
@@ -140,6 +173,8 @@
                                         <td>
                                             @if ($laporan->status == 'pending')
                                                 <span class="badge bg-secondary">Menunggu</span>
+                                            @elseif($laporan->status == 'respon')
+                                                <span class="badge bg-info text-dark">Ditanggapi</span>
                                             @elseif($laporan->status == 'proses')
                                                 <span class="badge bg-warning text-dark">Diproses</span>
                                             @else
@@ -162,6 +197,7 @@
                                 </tr>
                             @endif
                         </tbody>
+
                     </table>
                 </div>
                 <div class="row mb-4">

@@ -1,22 +1,22 @@
 .sidebar {
     height: 100vh;
-    background-color: #0d6efd; /* Biru (Beda dengan Admin yang gelap) */
-    color: white;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
 }
 
 .sidebar .nav-link {
-    color: white;
-    margin-bottom: 5px;
+    color: #333;
+    padding: 10px 15px;
 }
 
 .sidebar .nav-link:hover,
 .sidebar .nav-link.active {
-    background-color: #0b5ed7; /* Biru lebih gelap saat hover */
+    background-color: #0d6efd;
+    color: white;
     border-radius: 5px;
-    font-weight: bold;
 }
 
 .card-icon {
-    font-size: 2rem;
-    opacity: 0.5;
+    font-size: 2.5rem;
+    opacity: 0.8;
 }
