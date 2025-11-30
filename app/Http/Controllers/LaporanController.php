@@ -8,6 +8,7 @@ use App\Models\laporan as ModelsLaporan;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Builder\Function_;
 use PhpParser\Node\Expr\FuncCall;
+use App\Notifications\LaporanStatusUpdate;
 
 class LaporanController extends Controller
 {
@@ -60,18 +61,29 @@ class LaporanController extends Controller
         $laporan = Laporan::findOrFail($id);
         return view('home.detail_laporan', compact('laporan'));
     }
-
     public function UpdateStatus(Request $request, $id)
     {
         $laporan = Laporan::findOrFail($id);
         $laporan->status = $request->status;
+
+        if ($request->has('tanggapan')) {
+            $laporan->tanggapan = $request->tanggapan;
+        }
+
+        if ($request->file('foto_selesai')) {
+            $file = $request->file('foto_selesai');
+            $nama_file = time() . "_selesai_" . $file->getClientOriginalName();
+            $file->storeAs('bukti_selesai', $nama_file, 'public');
+            $laporan->foto_selesai = 'bukti_selesai/' . $nama_file;
+        }
+
         $laporan->save();
 
-        // --- GANTI INI ---
-        // return back()->with('success', 'Status Laporan berhasil diupdate');
+        // --- KIRIM NOTIFIKASI KE DASHBOARD WARGA ---
+        // $laporan->user artinya notifikasi dikirim ke pemilik laporan
+        $laporan->user->notify(new LaporanStatusUpdate($laporan));
+        // -------------------------------------------
 
-        // --- JADI INI ---
-        // Redirect ke route 'admin_rt' (Dashboard Admin)
-        return redirect()->route('admin_rt')->with('success', 'Status Laporan berhasil diupdate!');
+        return redirect()->route('admin_rt')->with('success', 'Status diperbarui & Notifikasi dikirim!');
     }
 }

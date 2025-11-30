@@ -2,18 +2,16 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+// Import Controller
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
+// Import Model (PENTING BIAR GAK ERROR 'Undefined type Laporan')
 use App\Models\Laporan;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-*/
 
-// Halaman Depan (Landing Page)
+
+// Halaman Depan
 Route::get('/', function () {
     return view('home.welcome_warga');
 });
@@ -50,13 +48,28 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/laporan/create', [LaporanController::class, 'create']);
 Route::post('/laporan/store', [LaporanController::class, 'store']);
 
-// 2. Halaman Riwayat (Tambahan)
+// 2. Halaman Riwayat
 Route::get('/laporan/riwayat', [LaporanController::class, 'history']);
 
-// 3. Update Status (PUT) - Wajib ditaruh SEBELUM route detail {id}
-// PENTING: Namanya 'laporan.update' agar cocok dengan form HTML
+// 3. Update Status (POST)
+// Sesuai request: Namanya 'update_laporan'
 Route::post('/laporan/{id}/update', [LaporanController::class, 'UpdateStatus'])->name('update_laporan');
 
 // 4. Detail Laporan (GET)
-// PENTING: Namanya 'laporan.show' agar cocok dengan tombol 'Detail'
+// Sesuai request: Namanya 'detail_laporan'
 Route::get('/laporan/{id}', [LaporanController::class, 'show'])->name('detail_laporan');
+
+
+// --- Fitur Notifikasi & Inbox ---
+
+// Tandai sudah dibaca
+Route::get('/mark-as-read', function () {
+    Auth::user()->unreadNotifications->markAsRead();
+    return back();
+})->middleware('auth')->name('notifikasi.read');
+
+// Halaman Kotak Masuk
+Route::get('/kotak-masuk', [DashboardController::class, 'inbox'])->middleware('auth')->name('inbox');
+
+// Route untuk klik notifikasi satuan
+Route::get('/notifikasi/{id}/baca', [DashboardController::class, 'markAsRead'])->name('notifikasi.baca');

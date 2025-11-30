@@ -14,7 +14,9 @@ class laporan extends Model
         'judul',
         'deskripsi',
         'foto',
+        'foto_selesai',
         'status',
+        'tanggapan',
     ];
 
     public function user()
